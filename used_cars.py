@@ -6,7 +6,10 @@ import pandas as pd
 import pickle
 from xgboost import XGBRegressor
 from sklearn.preprocessing import scale
-#import argparse
+import warnings
+
+# Supress warnings
+warnings.filterwarnings("ignore")
 
 # Import model
 filename = 'regressor.pkl'
@@ -72,7 +75,7 @@ print("And lastly: Please enter the (desired) location of the car as a german zi
 zip_code_in = int(input())
 lat_in = df_zips[df_zips['plz'] == zip_code_in].lat
 lon_in = df_zips[df_zips['plz'] == zip_code_in].lon
-city_in = df_zips[df_zips['plz'] == zip_code_in].Ort
+city_in = df_zips[df_zips['plz'] == zip_code_in].Ort.values
 df_in['lat'] = lat_in
 df_in['lon'] = lon_in
 
@@ -80,5 +83,6 @@ print('Processing...')
 print()
 
 # Calculate price
-y_pred = loaded_regressor.predict(df_in.values)
-print('The predicted price for the entered car in {} is: {:.0f}€'.format(city_in.values[0], y_pred[0]))
+#df_in = scale(df_in)
+y_pred = loaded_regressor.predict(df_in)
+print('The predicted price for the entered car in {} is: {:.0f}€'.format(city_in[0], y_pred[0]))
