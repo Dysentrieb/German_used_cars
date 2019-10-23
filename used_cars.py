@@ -13,7 +13,7 @@ def calc_price():
     warnings.filterwarnings("ignore")
 
     # Import model
-    filename = 'regressor.pkl'
+    filename = 'gs_best_reg.pkl'
     loaded_regressor = pickle.load(open(filename, 'rb'))
 
     # Import df_zips
@@ -38,6 +38,10 @@ def calc_price():
         vehicleType_in = 'kleinwagen'
     elif vehicleType_in == 'station':
         vehicleType_in = 'kombi'
+    elif vehicleType_in == 'convertible':
+        vehicleType_in = 'cabrio'
+    elif vehicleType_in == 'other':
+        vehicleType_in = 'andere'
     vehicleType_in = 'vehicleType_' + vehicleType_in
     df_in[vehicleType_in] = 1
 
@@ -61,7 +65,14 @@ def calc_price():
     df_in[fuelType_in] = 1
 
     print("Please enter the brand of the car.")
-    brand_in = 'brand_' + input().lower()
+    brand_in = input().lower()
+    if brand_in == 'mercedes':
+        brand_in = 'mercedes_benz'
+    elif brand_in == 'mercedes-benz':
+        brand_in = 'mercedes_benz'
+    elif brand_in == 'vw':
+        brand_in = 'volkswagen'
+    brand_in = 'brand_' + brand_in
     df_in[brand_in] = 1
 
     print("Is there any unrepaired damage? If so, type 1, otherwise 0.")
@@ -71,6 +82,10 @@ def calc_price():
     print("Enter the age of the car in years.")
     age_in = float(input())
     df_in['age'] = age_in
+
+    print("Enter the mileage of the car in Kilometers.")
+    km_in = float(input())
+    df_in['kilometer'] = km_in
 
     print("And lastly: Please enter the (desired) location of the car as a german zip-code.")
     zip_code_in = int(input())
