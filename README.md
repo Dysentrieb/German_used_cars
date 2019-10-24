@@ -16,6 +16,9 @@ Germany is a car-nation. Not only it is home to several of the worlds largest ca
 7. What is a common mileage for used cars?
 8. Can a car value be predicted by using features from the add?
 
+### Results:
+All of the above questions are answered in detail and a regression model is developed using xgboost-algorithm. The model's performance with an R²-score of 0.76 is satisfying. More detailed information can be found in the Medium-Post and the Notebook.
+
 ### Programming Language and Required libraries:
 Everything was coded in Python 3. To run the notebook, you will need the following libraries:
 - numpy
